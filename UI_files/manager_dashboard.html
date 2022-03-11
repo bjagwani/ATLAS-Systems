@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="./App.css" rel="stylesheet" />
+
+  <!-- :#b5b5b5  #343434-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    var isManual = false;
+    var crowdAlert = "";
+    $(document).ready(function() {
+
+      $("#logintime").text(new Date().toLocaleTimeString());
+
+      $("#a1power").on("input", function() {
+        $("#a1reading").text(this.value + "%");
+      });
+      $("#a2power").on("input", function() {
+        $("#a2reading").text(this.value + "%");
+      });
+      $("#b1power").on("input", function() {
+        $("#b1reading").text(this.value + "%");
+      });
+      $("#b2power").on("input", function() {
+        $("#b2reading").text(this.value + "%");
+      });
+      $("#b3power").on("input", function() {
+        $("#b3reading").text(this.value + "%");
+      });
+      $("#c1power").on("input", function() {
+        $("#c1reading").text(this.value + "%");
+      });
+
+      setInterval(function() {
+        let sectionA1Count = 15 + Math.ceil(Math.random() * 10);
+        $("#incount").html(sectionA1Count);
+        $("#outcount").html(10 + Math.ceil(Math.random() * 10));
+        $("#vehiclecount").html(5 + Math.ceil(Math.random() * 10));
+
+        let totalCount = 55 + Math.ceil(Math.random() * 10);
+        if (totalCount > 62) {
+          //alert("Present Crowd Strength is greater than 62");
+        }
+        $("#10to20count").html(totalCount);
+
+
+
+      }, 1000);
+
+
+
+      setInterval(function() {
+
+
+        let a1CrowdValue = 40 + Math.ceil(Math.random() * 20);
+        a1CrowdValue = a1CrowdValue - Math.ceil(Math.random() * 20);
+        let a2CrowdValue = 40 + Math.ceil(Math.random() * 20);
+        a2CrowdValue = a2CrowdValue - Math.ceil(Math.random() * 20);
+        let b1CrowdValue = 40 + Math.ceil(Math.random() * 20);
+        b1CrowdValue = b1CrowdValue - Math.ceil(Math.random() * 20);
+        let b2CrowdValue = 40 + Math.ceil(Math.random() * 20);
+        b2CrowdValue = b2CrowdValue - Math.ceil(Math.random() * 20);
+        let b3CrowdValue = 40 + Math.ceil(Math.random() * 20);
+        b3CrowdValue = b3CrowdValue - Math.ceil(Math.random() * 20);
+        let c1CrowdValue = 40 + Math.ceil(Math.random() * 20);
+        c1CrowdValue = c1CrowdValue - Math.ceil(Math.random() * 20);
+
+        let defpower = 50;
+        //console.log(isManual);
+        if (!isManual) {
+          let a1power = defpower;
+          if (a1CrowdValue > 40) {
+            a1power = 80;
+          } else if (a1CrowdValue < 40) {
+            a1power = 35;
+          }
+          $("#a1power").val(a1power);
+          $("#a1reading").text(a1power + "%");
+
+          let a2power = defpower;
+          if (a2CrowdValue > 40) {
+            a2power = 60;
+          } else if (a2CrowdValue < 40) {
+            a2power = 55;
+          }
+          $("#a2power").val(a2power);
+          $("#a2reading").text(a2power + "%");
+
+          let b1power = defpower;
+          if (b1CrowdValue > 40) {
+            b1power = 55;
+          } else if (b1CrowdValue < 40) {
+            b1power = 25;
+          }
+          $("#b1power").val(b1power);
+          $("#b1reading").text(b1power + "%");
+
+          let b2power = defpower;
+          if (b2CrowdValue > 40) {
+            b2power = 95;
+          } else if (b2CrowdValue < 40) {
+            b2power = 45;
+          }
+          $("#b2power").val(b2power);
+          $("#b2reading").text(b2power + "%");
+
+          let b3power = defpower;
+          if (b3CrowdValue > 40) {
+            b3power = 55;
+          } else if (b3CrowdValue < 40) {
+            b3power = 15;
+          } else {
+            b3power = defpower;
+          }
+          $("#b3power").val(b3power);
+          $("#b3reading").text(b3power + "%");
+
+          let c1power = defpower;
+          if (c1CrowdValue > 40) {
+            c1power = 75;
+          } else if (c1CrowdValue < 40) {
+            c1power = 25;
+          }
+          $("#c1power").val(c1power);
+          $("#c1reading").text(c1power + "%");
+        }
+
+        $("#a1crowd").html(a1CrowdValue);
+        $("#a2crowd").html(a2CrowdValue);
+        $("#b1crowd").html(b1CrowdValue);
+        $("#b2crowd").html(b2CrowdValue);
+        $("#b3crowd").html(b3CrowdValue);
+        $("#c1crowd").html(c1CrowdValue);
+
+        //$("#a1power").val(10);
+        //$("#a1power").val(15);
+        //$("#a1power").val(20);
+        //$("#a1power").val(25);
+      }, 2000);
+
+      //$("#schoolName").text(window.localStorage.getItem("schoolName").toLowerCase());
+      //$("#logo").attr("src", window.localStorage.getItem("logo"));
+
+      $("#360_button").on("click", function() {
+        $("#realtime").hide();
+        $("#power").hide();
+        $("#datainsights").hide();
+        $("#emergency").hide();
+        $("#360").show();
+        clearInterval(crowdAlert);
+      });
+
+      $("#realtime_button").on("click", function() {
+        $("#realtime").show();
+        $("#power").hide();
+        $("#datainsights").hide();
+        $("#emergency").hide();
+        $("#360").hide();
+        crowdAlert = setInterval(function() {
+          $("#10to20count").html(75);
+          alert("ALERT!\nPresent Crowd Strength is greater than the threshold");
+        }, 10000);
+      });
+
+      $("#power_button").on("click", function() {
+        $("#realtime").hide();
+        $("#power").show();
+        $("#datainsights").hide();
+        $("#emergency").hide();
+        $("#360").hide();
+      });
+
+      $("#datainsights_button").on("click", function() {
+        $("#realtime").hide();
+        $("#power").hide();
+        $("#datainsights").show();
+        $("#emergency").hide();
+        $("#360").hide();
+      });
+
+      $("#emergency_button").on("click", function() {
+        $("#realtime").hide();
+        $("#power").hide();
+        $("#datainsights").hide();
+        $("#emergency").show();
+        $("#360").hide();
+      });
+
+      $("#vehicleLink").on("click", function() {
+        if ($("#suv").is(":visible")) {
+          $("#suv").hide();
+        } else {
+          $("#suv").show();
+        }
+        //$("#suv").show();
+        if ($("#sedan").is(":visible")) {
+          $("#sedan").hide();
+        } else {
+          $("#sedan").show();
+        }
+
+        if ($("#hatchback").is(":visible")) {
+          $("#hatchback").hide();
+        } else {
+          $("#hatchback").show();
+        }
+
+        if ($("#parkinggif").is(":visible")) {
+          $("#parkinggif").hide();
+        } else {
+          $("#parkinggif").show();
+        }
+
+
+
+
+      });
+
+      $("#peoplecountlink").on("click", function() {
+        if ($("#opencvdemo").is(":visible")) {
+          $("#opencvdemo").hide();
+        } else {
+          $("#opencvdemo").show();
+        }
+      });
+
+      $('input[type=radio][name=power_set]').change(function() {
+        if (this.value == 'system') {
+          isManual = false;
+        } else {
+          isManual = true;
+        }
+
+      });
+
+      $("#a1power").change(function() {
+        $("#a1reading").text(this.value + "%");
+      })
+
+      $("#checkinsights").click(function() {
+        if ($("#months").val() != 0) {
+          $("#monthtable").show();
+          $("#yeartable").hide();
+          $("#monthinsights").text($('#months').find(":selected").text());
+        } else if ($("#year").val() != 0) {
+          $("#yeartable").show();
+          $("#monthtable").hide();
+        } else {
+          $("#yeartable").hide();
+          $("#monthtable").hide();
+        }
+      });
+
+      $("#logout").click(function() {
+        window.open("./index.html", "_self");
+      });
+
+      $(".logout").click(function() {
+        window.open("./index.html", "_self");
+      });
+    });
+  </script>
+</head>
+
+<body style="height: 100%">
+  <div id="root" style="height: 100%; margin: 0px; padding: 0px" class="container-fluid">
+    <div style="height:100%;background-color:rgb(223,224,228);margin:0px;padding:0px;width:100%">
+      <div class='row blue-template' id='schoolHeader' style="
+      width: 100%;
+      margin: 0px;">
+        <div class='col-sm-12' style="padding:20px;text-align:center;height:170px;">
+          <!--<img id='logo' src="" style="margin: 0 auto; display:block;height:70px" />-->
+
+          <h1 id='schoolName' style="text-align:center;color: white;font-family: Cinzel;font-size:50px">
+            GREAT MALL
+          </h1>
+          <span style="color:white;">Powered by Atlas</span>
+        </div>
+
+      </div>
+      <div class='row' style="padding-top:15px;margin-bottom:15px;width:100%;margin-left:0px;margin-right:0px">
+        <div class='col-xl-10 offset-xl-1' id='header'>
+          <button id="logout" class='btn btn-primary btn-lg blue-template' style="border-radius:50%;float:right;">
+            <i class='fa fa-power-off'></i>
+          </button>
+
+          <span style="position:absolute;right:20px;top:70px;font-size:12px">
+            <a class='logout'>
+              <b style="color:black;">LOGOUT</b>
+            </a>
+          </span>
+
+          <img id='studid' src="./dummyPic.png" style="margin-left:15px;width:150px;height:160px;border:2px solid rgb(229, 230, 233);border-bottom:6px solid rgb(229, 230, 233)" />
+
+          <div id='userBasicDetails'>
+            <h3 style="padding:0px;margin:0px">
+              <b>Store Dashboard</b>
+            </h3>
+
+            <hr style="height:1px;background-color:black;color:black;margin-top:5px;margin-bottom:5px" />
+            <div id='detailsWhiteBox'>
+              <div id='basicDataCol1' class='basicDataCols'>
+                <label class='dataLabels'>
+                  FirstName: Gaurish
+                </label>
+                <br />
+                <label class='dataLabels'>MiddleName:</label>
+                <br />
+                <label class='dataLabels'>
+                  LastName: Anvekar
+                </label>
+              </div>
+              <div id='basicDataCol2' class='basicDataCols'>
+                <label class='dataLabels'>
+                  EmployeeID: A100
+                </label>
+                <br />
+                <label class='dataLabels'>
+                  LoginTime: <span id="logintime"></span>
+                </label>
+                <br />
+                <label class='dataLabels'>
+                  Gender: Male
+                </label>
+              </div>
+              <div id='basicDataCol3' class='basicDataCols' style="vertical-align:top">
+                <label class='dataLabels'>
+                  Department:
+                </label>
+                <br />
+                <label class='dataLabels'>
+                  LastLogin:
+                </label>
+                <br />
+                <label class='dataLabels'>
+                  Email:
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='row' style="background-color:rgb(223, 224, 228);width:100%;margin-left:0px;margin-right:0px">
+        <div class='offset-xl-1 col-xl-10' id='DashBoardContainer'>
+          <div class='row' style="margin-left:0px;margin-right:0px">
+            <div class='col-lg-3 col-md-3 col-sm-3' id='buttonMenu'>
+              <div class='buttonContainer'>
+                <div class='menuIconDiv blue-template' style="padding:0px;text-align:center;">
+                  <i class='fa fa-bars' aria-hidden='true'></i>
+                </div>
+              </div>
+              <div class='buttonContainer'>
+
+                <button class='btn btn-primary btn-block attendanceStatus blue-template' name='Attendance' id="realtime_button">
+                  Crowd Stats
+                </button>
+              </div>
+
+              <div class='buttonContainer'>
+                <button class='btn btn-primary btn-block assignmentDetails blue-template' name='Assignments' type="submit" id="360_button">
+                  360 View
+                </button>
+              </div>
+
+              <!--
+              <div class='buttonContainer'>
+                <button class='btn btn-primary btn-block parentDetails blue-template' name='Library' id="power_button">
+                  Power Management
+                </button>
+              </div>
+
+
+              <div class='buttonContainer'>
+                <button class='btn btn-primary btn-block feesDetails blue-template' name='Lecture' id="datainsights_button">
+                  Data Insights
+                </button>
+              </div>
+
+
+              <div class='buttonContainer'>
+                <button class='btn btn-primary btn-block resultDetails blue-template' id="emergency_button">
+                  Emergency Exit
+                </button>
+              </div>-->
+
+              <!--
+              <div class='buttonContainer'>
+                <button class='btn btn-primary btn-block schoolEvents blue-template'>
+
+                </button>
+              </div>
+
+
+              <div class='buttonContainer'>
+                <button class='btn btn-primary btn-block transportDetails blue-template'>
+
+                </button>
+              </div>
+
+
+              <div class='buttonContainer'>
+                <button class='btn btn-primary btn-block libraryBooks blue-template'>
+
+                </button>
+              </div>
+
+
+              <div class='buttonContainer'>
+                <button class='btn btn-primary btn-block addressDetails blue-template'>
+
+                </button>
+              </div>
+
+
+              <div class='buttonContainer'>
+                <button class='btn btn-primary btn-block contactDetails blue-template'>
+
+                </button>
+              </div>
+            -->
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9" id='queryResultContainer'>
+              <div id="realtime" style="display:none;">
+                <h5 style="margin:0 auto;width:30%;text-align:center">
+                  <b>Crowd Stats</b>
+                </h5>
+                <hr style="height:1px;background-color:black;color:black;margin-top:5px;margin-bottom:5px" />
+                <div class='row'>
+                  <div class='col-12'>
+                    <table class="table table-striped">
+
+                      <tbody>
+                        <tr>
+                          <td>Section A1 Count:</td>
+                          <td id="incount">40</td>
+
+                        </tr>
+
+                        <tr>
+                          <td>Section B1 Count:</td>
+                          <td id="outcount">30</td>
+                        </tr>
+                        <tr>
+                          <td>Section B2 Count:</td>
+                          <td id="vehiclecount">40</td>
+
+                        </tr>
+
+
+
+                        <tr>
+                          <td>Total Count:</td>
+                          <td id="10to20count">15</td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                    <!--
+                    <div class='form-check'>
+                      <input type='radio' class='form-check-input' name='type' value='monthly' />
+                      <label>
+                        1.) Please select a month and year:
+                      </label>
+                      <br />
+                    </div>
+                    <select class='form-control' id='months' name='month' style="width:170px;display:inline-block">
+                      <option value='0'>SELECT MONTH</option>
+                      <option value='1'>January</option>
+                      <option value='2'>February</option>
+                      <option value='3'>March</option>
+                      <option value='4'>April</option>
+                      <option value='5'>May</option>
+                      <option value='6'>June</option>
+                      <option value='7'>July</option>
+                      <option value='8'>August</option>
+                      <option value='9'>September</option>
+                      <option value='10'>October</option>
+                      <option value='11'>November</option>
+                      <option value='12'>December</option>
+                    </select>
+                    <select class='form-control' id='year' name='year' style="width:170px;display:inline-block">
+                      <option value='0'>SELECT YEAR</option>
+                      <option value='2020'>2020</option>
+                      <option value='2021'>2021</option>
+                      <option value='2022'>2022</option>
+                    </select>
+
+
+                    <br />
+                    <br />
+                  </div>
+                  <div class='col-12'>
+                    <div class='form-check'>
+                      <input type='radio' class='form-check-input' name='type' value='specific' required />
+                      <label>
+                        2.) Please enter start date and end date:
+                      </label>
+                    </div>
+
+                    <div style="display:inline-block;width:170px">
+                      <input placeholder='From Date' class='form-control' style="width:170px;display:inline-block" />
+                    </div>
+                    <div style="display:inline-block;width:170px">
+                      <input placeholder='Till Date' class='form-control' style="width:170px;display:inline-block" />
+                    </div>
+                    <br />
+                    <br />
+
+                  </div>
+
+                  <div class='col-12'>
+                    <div class='form-check'>
+                      <input type='radio' class='form-check-input' name='type' />
+                      <label>3.) For complete stats.</label>
+                    </div>
+                    <br />
+                    <div class='col-12' style="text-align:center">
+                      <button type='submit' class='btn btn-primary btn-sm blue-template' id='tillDateAttendance'>
+                        Check Stats
+                      </button>
+                    </div>
+                  </div>
+                -->
+                  </div>
+
+
+
+
+                </div>
+              </div>
+              <div id="360" style="display:none;">
+                <h5 style="margin:0 auto;width:30%;text-align:center">
+                  <b>360 View</b>
+                </h5>
+                <hr style="height:1px;background-color:black;color:black;margin-top:5px;margin-bottom:5px" />
+                <div class='row'>
+                  <div class='col-12'>
+                    <div class='form-check'>
+                      <!--
+                      <iframe width="90%" height="500px" allowFullScreen="true" allow="accelerometer; magnetometer; gyroscope"
+                        style="display:block; margin:20px auto; border:0 none; max-width:880px;border-radius:8px; box-shadow: 0 1px 1px rgba(0,0,0,0.11),0 2px 2px rgba(0,0,0,0.11),0 4px 4px rgba(0,0,0,0.11),0 6px 8px rgba(0,0,0,0.11),0 8px 16px rgba(0,0,0,0.11);"
+                        src="https://panoraven.com/en/embed/NbkyFj9Du5"></iframe> -->
+                      <iframe width="90%" height="500px" allowFullScreen="true" allow="accelerometer; magnetometer; gyroscope"
+                        style="display:block; margin:20px auto; border:0 none; max-width:880px;border-radius:8px; box-shadow: 0 1px 1px rgba(0,0,0,0.11),0 2px 2px rgba(0,0,0,0.11),0 4px 4px rgba(0,0,0,0.11),0 6px 8px rgba(0,0,0,0.11),0 8px 16px rgba(0,0,0,0.11);"
+                        src="https://panoraven.com/en/embed/RXjrGRKcsG"></iframe>
+                      <!--<iframe id="iframe-youtube-player" width="560" height="315" src="https://www.youtube.com/embed/lsZF9p8rXQU?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+
+                      <input type='radio' class='form-check-input' name='type' value='monthly' />
+                      <label>
+                        1.) Please select a month and year:
+                      </label>
+                      <br />
+                    </div>
+                    <select class='form-control' id='months' name='month' style="width:170px;display:inline-block">
+                      <option value='0'>SELECT MONTH</option>
+                      <option value='1'>January</option>
+                      <option value='2'>February</option>
+                      <option value='3'>March</option>
+                      <option value='4'>April</option>
+                      <option value='5'>May</option>
+                      <option value='6'>June</option>
+                      <option value='7'>July</option>
+                      <option value='8'>August</option>
+                      <option value='9'>September</option>
+                      <option value='10'>October</option>
+                      <option value='11'>November</option>
+                      <option value='12'>December</option>
+                    </select>
+                    <select class='form-control' id='year' name='year' style="width:170px;display:inline-block">
+                      <option value='0'>SELECT YEAR</option>
+                      <option value='2020'>2020</option>
+                      <option value='2021'>2021</option>
+                      <option value='2022'>2022</option>
+                    </select>
+
+                    <br />
+                    <br />
+                  </div>
+                  <div class='col-12'>
+                    <div class='form-check'>
+                      <input type='radio' class='form-check-input' name='type' value='specific' required />
+                      <label>
+                        2.) Please enter start date and end date:
+                      </label>
+                    </div>
+
+                    <div style="display:inline-block;width:170px">
+                      <input placeholder='From Date' class='form-control' style="width:170px;display:inline-block" />
+                    </div>
+                    <div style="display:inline-block;width:170px">
+                      <input placeholder='Till Date' class='form-control' style="width:170px;display:inline-block" />
+                    </div>
+                    <br />
+                    <br />
+                  </div>
+
+                  <div class='col-12'>
+                    <div class='form-check'>
+                      <input type='radio' class='form-check-input' name='type' />
+                      <label>3.) For complete stats.</label>
+                    </div>
+                    <br />
+                    <div class='col-12' style="text-align:center">
+                      <button type='submit' class='btn btn-primary btn-sm blue-template' id='tillDateAttendance'>
+                        Check Stats
+                      </button>
+                    </div>
+                  </div>
+                -->
+                    </div>
+
+                  </div>
+
+
+                </div>
+              </div>
+              <div id="power" style="display:none;">
+                <h5 style="margin:0 auto;width:30%;text-align:center">
+                  <b>Power Management</b>
+                </h5>
+                <hr style="height:1px;background-color:black;color:black;margin-top:5px;margin-bottom:5px" />
+                <div class='row'>
+                  <div class='col-12'>
+                    <input type="radio" id="html" name="power_set" value="system" checked="checked">
+                      <label for="html">System</label>
+                      <input type="radio" id="css" name="power_set" value="manual">
+                    <label for="html">Manual</label>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Mall Sector</th>
+                          <th>Crowd Strength</th>
+                          <th>Power</th>
+                          <th>Readings</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr>
+                          <td>A1</td>
+                          <td id="a1crowd">40</td>
+                          <td>
+                            <div class="slidecontainer">
+                              <input style="width:200px;" type="range" min="0" max="100" value="20" id="a1power">
+
+                            </div>
+
+                          </td>
+                          <td id="a1reading">
+                            40%
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td>A2</td>
+                          <td id="a2crowd">30</td>
+                          <td>
+                            <div class="slidecontainer">
+                              <input style="width:200px" type="range" min="0" max="100" value="50" id="a2power">
+                            </div>
+                          </td>
+                          <td id="a2reading">
+                            40%
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td>B1</td>
+                          <td id="b1crowd">45</td>
+                          <td>
+                            <div class="slidecontainer">
+                              <input style="width:200px" type="range" min="0" max="100" value="35" id="b1power">
+                            </div>
+                          </td>
+                          <td id="b1reading">
+                            40%
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td>B2</td>
+                          <td id="b2crowd">23</td>
+                          <td>
+                            <div class="slidecontainer">
+                              <input style="width:200px" type="range" min="0" max="100" value="25" id="b2power">
+                            </div>
+                          </td>
+                          <td id="b2reading">
+                            40%
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td>B3</td>
+                          <td id="b3crowd">33</td>
+                          <td>
+                            <div class="slidecontainer">
+                              <input style="width:200px" type="range" min="0" max="100" value="50" id="b3power">
+                            </div>
+                          </td>
+                          <td id="b3reading">
+                            40%
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td>C1</td>
+                          <td id="c1crowd">42</td>
+                          <td>
+                            <div class="slidecontainer">
+                              <input style="width:200px" type="range" min="0" max="100" value="60" id="c1power">
+                            </div>
+                          </td>
+                          <td id="c1reading">
+                            40%
+                          </td>
+
+                        </tr>
+
+                      </tbody>
+                    </table>
+
+
+
+                  </div>
+
+
+
+                </div>
+
+
+
+
+              </div>
+              <div id="datainsights" style="display:none;">
+                <h5 style="margin:0 auto;width:30%;text-align:center">
+                  <b>Data Insights</b>
+                </h5>
+                <hr style="height:1px;background-color:black;color:black;margin-top:5px;margin-bottom:5px" />
+                <div class='row'>
+                  <div class='col-12'>
+                    <div class='form-check'>
+
+                      <label>
+                        Please select a month and year:
+                      </label>
+                      <br />
+                    </div>
+                    <select class='form-control' id='months' name='month' style="width:170px;display:inline-block">
+                      <option value='0'>SELECT MONTH</option>
+                      <option value='1'>January</option>
+                      <option value='2'>February</option>
+                      <option value='3'>March</option>
+                      <option value='4'>April</option>
+                      <option value='5'>May</option>
+                      <option value='6'>June</option>
+                      <option value='7'>July</option>
+                      <option value='8'>August</option>
+                      <option value='9'>September</option>
+                      <option value='10'>October</option>
+                      <option value='11'>November</option>
+                      <option value='12'>December</option>
+                    </select>
+                    <select class='form-control' id='year' name='year' style="width:170px;display:inline-block">
+                      <option value='0'>SELECT YEAR</option>
+                      <option value='2020'>2020</option>
+                      <option value='2021'>2021</option>
+                      <option value='2022'>2022</option>
+                    </select>
+
+                    <br />
+                    <br />
+                  </div>
+
+
+                  <div class='col-12'>
+                    <div class='col-12' style="text-align:center">
+                      <button type='submit' class='btn btn-primary btn-sm blue-template' id='checkinsights'>
+                        Check Insights
+                      </button>
+                    </div>
+                    <br />
+                    <table style="display:none" id="monthtable" class="table">
+                      <thead>
+                        <tr>
+                          <th>Month</th>
+                          <th>Sector A1 Profit</th>
+                          <th>Sector A2 Profit</th>
+                          <th>Sector B1 Profit</th>
+                          <th>Sector B2 Profit</th>
+                          <th>Sector B3 Profit</th>
+                          <th>Power Savings</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td id="monthinsights"></td>
+                          <td>$1530</td>
+                          <td>$530</td>
+                          <td>$2530</td>
+                          <td>$3420</td>
+                          <td>$2330</td>
+                          <td>30%</td>
+
+
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table style="display:none" id="yeartable" class="table">
+                      <thead>
+                        <tr>
+                          <th>Month</th>
+                          <th>Sector A1 Profit</th>
+                          <th>Sector A2 Profit</th>
+                          <th>Sector B1 Profit</th>
+                          <th>Sector B2 Profit</th>
+                          <th>Sector B3 Profit</th>
+                          <th>Power Savings</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr>
+                          <td>January</td>
+                          <td>$1530</td>
+                          <td>$530</td>
+                          <td>$2530</td>
+                          <td>$3420</td>
+                          <td>$2330</td>
+                          <td>30%</td>
+
+
+                        </tr>
+                        <tr>
+                          <td>February</td>
+                          <td>$2530</td>
+                          <td>$5530</td>
+                          <td>$2530</td>
+                          <td>$7420</td>
+                          <td>$2330</td>
+                          <td>42%</td>
+
+
+                        </tr>
+                        <tr>
+                          <td>March</td>
+                          <td>$6530</td>
+                          <td>$5530</td>
+                          <td>$9530</td>
+                          <td>$420</td>
+                          <td>$330</td>
+                          <td>33%</td>
+
+
+                        </tr>
+                        <tr>
+                          <td>April</td>
+                          <td>$530</td>
+                          <td>$130</td>
+                          <td>$520</td>
+                          <td>$420</td>
+                          <td>$310</td>
+                          <td>60%</td>
+
+
+                        </tr>
+                        <tr>
+                          <td>May</td>
+                          <td>$509</td>
+                          <td>$430</td>
+                          <td>$232</td>
+                          <td>$1420</td>
+                          <td>$5330</td>
+                          <td>73%</td>
+
+
+                        </tr>
+                        <tr>
+                          <td>June</td>
+                          <td>$2530</td>
+                          <td>$5230</td>
+                          <td>$1430</td>
+                          <td>$7420</td>
+                          <td>$3330</td>
+                          <td>80%</td>
+
+
+                        </tr>
+                        <tr>
+                          <td>July</td>
+                          <td>$630</td>
+                          <td>$720</td>
+                          <td>$230</td>
+                          <td>$5420</td>
+                          <td>$2330</td>
+                          <td>25%</td>
+
+
+                        </tr>
+                        <tr>
+                          <td>August</td>
+                          <td>$930</td>
+                          <td>$230</td>
+                          <td>$250</td>
+                          <td>$4420</td>
+                          <td>$1330</td>
+                          <td>37%</td>
+
+
+                        </tr>
+                        <tr>
+                          <td>September</td>
+                          <td>$7530</td>
+                          <td>$430</td>
+                          <td>$1530</td>
+                          <td>$4420</td>
+                          <td>$9330</td>
+                          <td>53%</td>
+
+
+                        </tr>
+                        <tr>
+                          <td>October</td>
+                          <td>$830</td>
+                          <td>$430</td>
+                          <td>$530</td>
+                          <td>$340</td>
+                          <td>$230</td>
+                          <td>12%</t12>
+                        </tr>
+                        <tr>
+                          <td>November</td>
+                          <td>$1530</td>
+                          <td>$530</td>
+                          <td>$2530</td>
+                          <td>$3220</td>
+                          <td>$2130</td>
+                          <td>30%</td>
+
+
+                        </tr>
+                        <tr>
+                          <td>December</td>
+                          <td>$1530</td>
+                          <td>$532</td>
+                          <td>$2530</td>
+                          <td>$3420</td>
+                          <td>$2330</td>
+                          <td>30%</td>
+
+
+                        </tr>
+
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+
+
+
+              </div>
+              <div id="emergency" style="display:none;">
+                <h5 style="margin:0 auto;width:30%;text-align:center">
+                  <b>Emergency Exit</b>
+                </h5>
+                <hr style="height:1px;background-color:black;color:black;margin-top:5px;margin-bottom:5px" />
+                <div class='row'>
+                  <div class='col-12'>
+                    <div class='form-check'>
+                      <input type='radio' class='form-check-input' name='type' value='monthly' />
+                      <label>
+                        1.) Please select a month and year:
+                      </label>
+                      <br />
+                    </div>
+                    <select class='form-control' id='months' name='month' style="width:170px;display:inline-block">
+                      <option value='0'>SELECT MONTH</option>
+                      <option value='1'>January</option>
+                      <option value='2'>February</option>
+                      <option value='3'>March</option>
+                      <option value='4'>April</option>
+                      <option value='5'>May</option>
+                      <option value='6'>June</option>
+                      <option value='7'>July</option>
+                      <option value='8'>August</option>
+                      <option value='9'>September</option>
+                      <option value='10'>October</option>
+                      <option value='11'>November</option>
+                      <option value='12'>December</option>
+                    </select>
+                    <select class='form-control' id='year' name='year' style="width:170px;display:inline-block">
+                      <option value='0'>SELECT YEAR</option>
+                      <option value='2020'>2020</option>
+                      <option value='2021'>2021</option>
+                      <option value='2022'>2022</option>
+                    </select>
+
+                    <br />
+                    <br />
+                  </div>
+                  <div class='col-12'>
+                    <div class='form-check'>
+                      <input type='radio' class='form-check-input' name='type' value='specific' required />
+                      <label>
+                        2.) Please enter start date and end date:
+                      </label>
+                    </div>
+
+                    <div style="display:inline-block;width:170px">
+                      <input placeholder='From Date' class='form-control' style="width:170px;display:inline-block" />
+                    </div>
+                    <div style="display:inline-block;width:170px">
+                      <input placeholder='Till Date' class='form-control' style="width:170px;display:inline-block" />
+                    </div>
+                    <br />
+                    <br />
+                  </div>
+
+                  <div class='col-12'>
+                    <div class='form-check'>
+                      <input type='radio' class='form-check-input' name='type' />
+                      <label>3.) For complete stats.</label>
+                    </div>
+                    <br />
+                    <div class='col-12' style="text-align:center">
+                      <button type='submit' class='btn btn-primary btn-sm blue-template' id='tillDateAttendance'>
+                        Check Stats
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+
+
+</html>
